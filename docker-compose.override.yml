@@ -1,0 +1,22 @@
+services:
+  apigateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - SEQ_URL=${SEQ_URL}
+      - CONSUL_ADDRESS=${CONSUL_ADDRESS}
+    networks:
+      - booking-system-network
+    depends_on:
+      - seq
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+networks:
+  booking-system-network:
+    external: true
