@@ -1,8 +1,6 @@
 ﻿using Consul;
 using Microsoft.Extensions.Primitives;
 
-using System.Collections.Immutable;
-
 using Yarp.ReverseProxy.Configuration;
 
 using DestinationConfig = Yarp.ReverseProxy.Configuration.DestinationConfig;
