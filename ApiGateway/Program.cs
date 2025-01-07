@@ -1,6 +1,7 @@
 using ApiGateway.Config;
 using ApiGateway.Middleware;
 using ApiGateway.Services;
+using ApiGateway.Services.RateLimiter;
 
 using Consul;
 
@@ -14,6 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddSingleton<IRateLimiter>(sp => new TokenBucket(
+    bucketCapacity: 100,    // Максимальное количество токенов
+    refillRate: 10          // Токенов в секунду
+));
 
 // Service Discovery через Consul
 var consulAddress = builder.Configuration.GetValue<string>("CONSUL_ADDRESS");
