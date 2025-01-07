@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/bin/Debug
+/obj
+/.vs
+/ApiGateway/bin/Debug/net9.0
+/ApiGateway/logs
+/ApiGateway/obj
+/.env
