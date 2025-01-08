@@ -1,0 +1,32 @@
+services:
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: ApiGateway/Dockerfile
+    networks:
+      - booking-system-network
+
+  seq:
+    image: datalust/seq:latest
+    container_name: seq
+    restart: always
+    ports:
+      - "5341:80"
+    environment:
+      ACCEPT_EULA: "Y"
+    volumes:
+      - seq_data:/data
+      - seq_logs:/logs
+    networks:
+      - booking-system-network
+
+networks:
+  booking-system-network:
+    external: true
+
+volumes:
+  seq_data:
+    driver: local
+  seq_logs:
+    driver: local
